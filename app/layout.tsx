@@ -1,7 +1,33 @@
+'use client'
+import Header from 'components/Header/Header'
+import Sidemenu from 'components/Sidemenu/Sidemenu'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inconsolata } from 'next/font/google'
+import { ThemeContextProvider, useThemeContext } from 'context/theme'
+import { BgProvider, useBgContext } from 'context/bgContext'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Inconsolata({ subsets: ['latin'] })
+
+function Layout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const { darkMode } = useThemeContext()
+  const { bg } = useBgContext()
+
+  return (
+    <body className={`${font.className} font-bold bg-bgSecondary flex flex-col min-h-screen`}>
+      <Header />
+      <div className={`flex flex-col h-full w-full flex-1 p-8 ${darkMode ? 'bg-slate-950' : 'bg-gray-50'}`} style={{ backgroundColor: bg+'33' }}>
+        <div className='flex flex-1 items-start h-full w-full max-w-screen-xl mx-auto gap-4'>
+          <Sidemenu />
+          {children}
+        </div>
+      </div>
+    </body>
+  )
+}
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +41,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ThemeContextProvider>
+        <BgProvider>
+          <Layout>{children}</Layout>
+        </BgProvider>
+      </ThemeContextProvider>
     </html>
   )
 }

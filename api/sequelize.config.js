@@ -1,9 +1,10 @@
-const SequelizeAuto = require('sequelize-auto');
+const SequelizeAuto = await import('sequelize-auto')
+import msnodesqlv8 from 'msnodesqlv8/lib/sequelize/index.js'
 
-const auto = new SequelizeAuto('', '', '', {
+export const configObj = {
     host: '(localdb)\\MSSQLLocalDB',
     dialect: 'mssql',
-    dialectModule: require('msnodesqlv8/lib/sequelize'),
+    dialectModule: msnodesqlv8,
     dialectOptions: {
         options: {
           connectionString: 'server=(localdb)\\MSSQLLocalDB;Database=PklWikiDB;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}',
@@ -20,9 +21,11 @@ const auto = new SequelizeAuto('', '', '', {
     },
     // tables: ['table1', 'table2', 'myschema.table3'] // use all tables, if omitted
     //...
-})
+}
 
-auto.run().then(data => {
+const config = new SequelizeAuto('', '', '', configObj)
+
+config.run().then(data => {
   console.log(data.tables);      // table and field list
   console.log(data.foreignKeys); // table foreign key list
   console.log(data.indexes);     // table indexes

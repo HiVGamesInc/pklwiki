@@ -1,6 +1,7 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('pokemonType', {
+import { DataTypes } from 'sequelize';
+
+ function model(sequelize) {
+  const a = sequelize.define('pokemonType', {
     Id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -38,4 +39,8 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
+  console.log(sequelize.models)
+  return a
 };
+
+export default model;

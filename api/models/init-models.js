@@ -1,3 +1,4 @@
+import { DataTypes } from 'sequelize';
 var DataTypes = require("sequelize").DataTypes;
 var _evolutionLine = require("./evolutionLine");
 var _item = require("./item");
@@ -46,6 +47,5 @@ function initModels(sequelize) {
     type,
   };
 }
-module.exports = initModels;
-module.exports.initModels = initModels;
-module.exports.default = initModels;
+
+export default initModels;

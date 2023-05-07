@@ -2,16 +2,31 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js", 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-model": "sequelize-auto -c sequelize.config.js -l esm"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "nodemon": "^2.0.22"
+    "msnodesqlv8": "^3.1.0",
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.31.1",
+    "sequelize-auto": "^0.8.8"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "default": "./commonjs/index.cjs"
+      }
+    }
   }
 }

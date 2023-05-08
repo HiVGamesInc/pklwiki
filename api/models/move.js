@@ -1,6 +1,9 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('move', {
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
+
+export default class move extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -18,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false,
     indexes: [
       {
-        name: "PK__Move__3214EC079EDFDB8B",
+        name: "PK__Move__3214EC07C567216E",
         unique: true,
         fields: [
           { name: "Id" },
@@ -26,4 +29,5 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
-};
+  }
+}

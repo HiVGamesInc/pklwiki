@@ -1,40 +1,40 @@
-import { DataTypes } from 'sequelize';
-var DataTypes = require("sequelize").DataTypes;
-var _evolutionLine = require("./evolutionLine");
-var _item = require("./item");
-var _move = require("./move");
-var _pokemon = require("./pokemon");
-var _pokemonItem = require("./pokemonItem");
-var _pokemonMove = require("./pokemonMove");
-var _pokemonType = require("./pokemonType");
-var _type = require("./type");
+import _sequelize from "sequelize";
+const DataTypes = _sequelize.DataTypes;
+import _evolutionLine from  "./evolutionLine.js";
+import _item from  "./item.js";
+import _move from  "./move.js";
+import _pokemon from  "./pokemon.js";
+import _pokemonItem from  "./pokemonItem.js";
+import _pokemonMove from  "./pokemonMove.js";
+import _pokemonType from  "./pokemonType.js";
+import _type from  "./type.js";
 
-function initModels(sequelize) {
-  var evolutionLine = _evolutionLine(sequelize, DataTypes);
-  var item = _item(sequelize, DataTypes);
-  var move = _move(sequelize, DataTypes);
-  var pokemon = _pokemon(sequelize, DataTypes);
-  var pokemonItem = _pokemonItem(sequelize, DataTypes);
-  var pokemonMove = _pokemonMove(sequelize, DataTypes);
-  var pokemonType = _pokemonType(sequelize, DataTypes);
-  var type = _type(sequelize, DataTypes);
+export default function initModels(sequelize) {
+  const evolutionLine = _evolutionLine.init(sequelize, DataTypes);
+  const item = _item.init(sequelize, DataTypes);
+  const move = _move.init(sequelize, DataTypes);
+  const pokemon = _pokemon.init(sequelize, DataTypes);
+  const pokemonItem = _pokemonItem.init(sequelize, DataTypes);
+  const pokemonMove = _pokemonMove.init(sequelize, DataTypes);
+  const pokemonType = _pokemonType.init(sequelize, DataTypes);
+  const type = _type.init(sequelize, DataTypes);
 
-  pokemonItem.belongsTo(item, { as: "Item", foreignKey: "ItemId"});
-  item.hasMany(pokemonItem, { as: "PokemonItems", foreignKey: "ItemId"});
-  pokemonMove.belongsTo(move, { as: "Move", foreignKey: "MoveId"});
-  move.hasMany(pokemonMove, { as: "PokemonMoves", foreignKey: "MoveId"});
-  evolutionLine.belongsTo(pokemon, { as: "Evolution", foreignKey: "EvolutionId"});
-  pokemon.hasMany(evolutionLine, { as: "EvolutionLines", foreignKey: "EvolutionId"});
-  evolutionLine.belongsTo(pokemon, { as: "Pokemon", foreignKey: "PokemonId"});
-  pokemon.hasMany(evolutionLine, { as: "Pokemon_EvolutionLines", foreignKey: "PokemonId"});
-  pokemonItem.belongsTo(pokemon, { as: "Pokemon", foreignKey: "PokemonId"});
-  pokemon.hasMany(pokemonItem, { as: "PokemonItems", foreignKey: "PokemonId"});
-  pokemonMove.belongsTo(pokemon, { as: "Pokemon", foreignKey: "PokemonId"});
-  pokemon.hasMany(pokemonMove, { as: "PokemonMoves", foreignKey: "PokemonId"});
-  pokemonType.belongsTo(pokemon, { as: "Pokemon", foreignKey: "PokemonId"});
-  pokemon.hasMany(pokemonType, { as: "PokemonTypes", foreignKey: "PokemonId"});
-  pokemonType.belongsTo(type, { as: "Type", foreignKey: "TypeId"});
-  type.hasMany(pokemonType, { as: "PokemonTypes", foreignKey: "TypeId"});
+  pokemonItem.belongsTo(item, { foreignKey: "ItemId"});
+  item.hasMany(pokemonItem, { foreignKey: "ItemId"});
+  pokemonMove.belongsTo(move, { foreignKey: "MoveId"});
+  move.hasMany(pokemonMove, { foreignKey: "MoveId"});
+  evolutionLine.belongsTo(pokemon, { foreignKey: "EvolutionId"});
+  pokemon.hasMany(evolutionLine, { foreignKey: "EvolutionId"});
+  evolutionLine.belongsTo(pokemon, { foreignKey: "PokemonId"});
+  pokemon.hasMany(evolutionLine, { foreignKey: "PokemonId"});
+  pokemonItem.belongsTo(pokemon, { foreignKey: "PokemonId"});
+  pokemon.hasMany(pokemonItem, { foreignKey: "PokemonId"});
+  pokemonMove.belongsTo(pokemon, { foreignKey: "PokemonId"});
+  pokemon.hasMany(pokemonMove, { foreignKey: "PokemonId"});
+  pokemonType.belongsTo(pokemon, { foreignKey: "PokemonId"});
+  pokemon.hasMany(pokemonType, { foreignKey: "PokemonId"});
+  pokemonType.belongsTo(type, { foreignKey: "TypeId"});
+  type.hasMany(pokemonType, { foreignKey: "TypeId"});
 
   return {
     evolutionLine,
@@ -47,5 +47,3 @@ function initModels(sequelize) {
     type,
   };
 }
-
-export default initModels;

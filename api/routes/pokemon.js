@@ -3,15 +3,16 @@ import * as PokemonService from '../services/pokemon'
 
 const router = express.Router()
   
-router.get('/', async (req, res) => {
-  const pokemonRows = await PokemonService.getAll();
-console.log(pokemonRows)
+router.get('/:id?', async (req, res) => {
+  const id = req.params.id;
+  const pokemonRows = await PokemonService.getPokemon(id);
+
   const pokeArr = []
-  pokemonRows.forEach(({ dataValues: poke }) => {
+  pokemonRows.forEach(poke => {
     pokeArr.push(poke)
   })
 
   res.status(200).send(pokeArr)
 })
 
-module.exports = router
+export default router

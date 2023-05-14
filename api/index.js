@@ -1,7 +1,7 @@
 import express from 'express'
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv'
-import msnodesqlv8 from 'msnodesqlv8/lib/sequelize/index'
+import mysql from 'mysql2'
 
 import initModels from './models/init-models'
 import mainRouter from './routes'
@@ -14,17 +14,10 @@ const port = 3001
 export let sequelizeDb = {}
 
 async function init() {
-  sequelizeDb = new Sequelize('','','', {
-    host: process.env.MSSQL_DBHOST,
-    dialect: 'mssql',
-    dialectModule: msnodesqlv8,
-    dialectOptions: {
-        options: {
-          connectionString: `server=${process.env.MSSQL_DBHOST};Database=${process.env.MSSQL_DBNAME};Trusted_Connection=Yes;Driver={ODBC Driver 17 for SQL Server}`,
-        },
-      },
+  sequelizeDb = new Sequelize(process.env.MYSQL_DBNAME, process.env.MYSQL_DBUSER,process.env.MYSQL_DBPASSWORD, {
+    dialect: 'mysql',
+    dialectModule: mysql,
     noAlias: true,
-    port: process.env.MSSQL_DBPORT,
   });
 
   

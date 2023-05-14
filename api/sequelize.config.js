@@ -1,19 +1,13 @@
 const SequelizeAuto = require('sequelize-auto')
-const msnodesqlv8 = require('msnodesqlv8/lib/sequelize/index')
+const mysql = require('mysql2')
 
-require('dotenv').config();
+require('dotenv').config()
 
 const configObj = {
-    dialect: 'mssql',
-    dialectModule: msnodesqlv8,
-    dialectOptions: {
-      options: {
-        connectionString: `server=${process.env.MSSQL_DBHOST};Database=${process.env.MSSQL_DBNAME};Trusted_Connection=Yes;Driver={ODBC Driver 17 for SQL Server}`,
-      },
-    },
+    dialect: 'mysql',
+    dialectModule: mysql,
     lang: 'esm',
     directory: './models', // where to write files
-    port: process.env.MSSQL_DBPORT,
     caseModel: 'c', // convert snake_case column names to camelCase field names: user_id -> userId
     caseFile: 'c', // file names created for each model use camelCase.js not snake_case.js
     singularize: true, // convert plural table names to singular model names
@@ -26,7 +20,8 @@ const configObj = {
     //...
 }
 
-const config = new SequelizeAuto('', '', '', configObj)
+const config = new SequelizeAuto(process.env.MYSQL_DBNAME, process.env.MYSQL_DBUSER,process.env.MYSQL_DBPASSWORD, configObj)
+
 
 config.run().then(data => {
   console.log(data.tables);      // table and field list

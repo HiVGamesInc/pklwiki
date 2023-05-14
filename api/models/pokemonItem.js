@@ -1,45 +1,26 @@
 import _sequelize from 'sequelize';
 const { Model, Sequelize } = _sequelize;
 
-export default class pokemonItem extends Model {
+export default class pokemonitem extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     PokemonId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Pokemon',
-        key: 'Id'
-      }
+      allowNull: true
     },
     ItemId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Item',
-        key: 'Id'
-      }
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'PokemonItem',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__PokemonI__3214EC07CF9442A3",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'pokemonitem',
+    timestamps: false
   });
   }
 }

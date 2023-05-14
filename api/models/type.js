@@ -12,41 +12,48 @@ export default class type extends Model {
     },
     Name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
+      defaultValue: ""
     },
     NoDamageTo: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      defaultValue: ""
     },
     HalfDamageTo: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      defaultValue: ""
     },
     DoubleDamageTo: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      defaultValue: ""
     },
     NoDamageFrom: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      defaultValue: ""
     },
     HalfDamageFrom: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      defaultValue: ""
     },
     DoubleDamageFrom: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      defaultValue: ""
     }
   }, {
     sequelize,
-    tableName: 'Type',
-    schema: 'dbo',
+    tableName: 'type',
     timestamps: false,
     indexes: [
       {
-        name: "PK__Type__3214EC07379D55D1",
+        name: "PRIMARY",
         unique: true,
+        using: "BTREE",
         fields: [
           { name: "Id" },
         ]

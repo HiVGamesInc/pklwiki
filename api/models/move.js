@@ -5,29 +5,18 @@ export default class move extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     Name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Move',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__Move__3214EC07C567216E",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'move',
+    timestamps: false
   });
   }
 }

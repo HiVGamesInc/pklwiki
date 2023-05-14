@@ -1,7 +1,7 @@
 import _sequelize from 'sequelize';
 const { Model, Sequelize } = _sequelize;
 
-export default class pokemonType extends Model {
+export default class pokemontype extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     Id: {
@@ -14,7 +14,7 @@ export default class pokemonType extends Model {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Pokemon',
+        model: 'pokemon',
         key: 'Id'
       }
     },
@@ -22,21 +22,35 @@ export default class pokemonType extends Model {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Type',
+        model: 'type',
         key: 'Id'
       }
     }
   }, {
     sequelize,
-    tableName: 'PokemonType',
-    schema: 'dbo',
+    tableName: 'pokemontype',
     timestamps: false,
     indexes: [
       {
-        name: "PK__PokemonT__3214EC0750CAD60C",
+        name: "PRIMARY",
         unique: true,
+        using: "BTREE",
         fields: [
           { name: "Id" },
+        ]
+      },
+      {
+        name: "fk_pokemonType_pokemonId_idx",
+        using: "BTREE",
+        fields: [
+          { name: "PokemonId" },
+        ]
+      },
+      {
+        name: "fk_pokemonType_typeId_idx",
+        using: "BTREE",
+        fields: [
+          { name: "TypeId" },
         ]
       },
     ]

@@ -15,8 +15,9 @@ export default class pokemon extends Model {
       allowNull: false
     },
     IsShiny: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0
     },
     Level: {
       type: DataTypes.INTEGER,
@@ -36,17 +37,18 @@ export default class pokemon extends Model {
     },
     Characteristic: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: true,
+      defaultValue: ""
     }
   }, {
     sequelize,
-    tableName: 'Pokemon',
-    schema: 'dbo',
+    tableName: 'pokemon',
     timestamps: false,
     indexes: [
       {
-        name: "PK__Pokemon__3214EC078F6A2711",
+        name: "PRIMARY",
         unique: true,
+        using: "BTREE",
         fields: [
           { name: "Id" },
         ]

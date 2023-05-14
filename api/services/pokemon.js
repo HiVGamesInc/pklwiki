@@ -1,19 +1,17 @@
 import { sequelizeDb } from '../index'
-import PokemonType from '../models/pokemonType';
+import PokemonType from '../models/pokemontype';
 
 async function getPokemon(id = false) {
   try {
     const table = sequelizeDb.models.pokemon
-    const queryFunc = id ? 'findOne' : 'findAll'
     
-    let pokemon = await table[queryFunc]({
+    let pokemon = await table.findAll({
       ...(id ? {where: { reference: id }} : {}),
       include: [{
         model: PokemonType,
       }]
     })
 
-    pokemon = id ? [pokemon] : pokemon
     pokemon = await Promise.all(pokemon.map(async item => {
       const data = item.dataValues
       // const types = await getTypes(data.types)
@@ -27,7 +25,7 @@ async function getPokemon(id = false) {
         reference: data.Reference,
         description: data.Description,
         characteristic: data.Characteristic,
-        types: data.pokemonTypes.map(type => type.TypeId)
+        types: data.pokemontypes.map(type => type.TypeId)
       })
     }))
 

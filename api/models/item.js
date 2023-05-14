@@ -5,29 +5,18 @@ export default class item extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     Name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Item',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__Item__3214EC072BFBBF28",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'item',
+    timestamps: false
   });
   }
 }

@@ -1,29 +1,22 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('item', {
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
+
+export default class item extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     Name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Item',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__Item__3214EC0701AFED40",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'item',
+    timestamps: false
   });
-};
+  }
+}

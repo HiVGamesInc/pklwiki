@@ -1,7 +1,9 @@
-import { DataTypes } from 'sequelize';
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
 
-function model(sequelize) {
-  return sequelize.define('pokemon', {
+export default class pokemon extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -13,8 +15,9 @@ function model(sequelize) {
       allowNull: false
     },
     IsShiny: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0
     },
     Level: {
       type: DataTypes.INTEGER,
@@ -34,23 +37,23 @@ function model(sequelize) {
     },
     Characteristic: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: true,
+      defaultValue: ""
     }
   }, {
     sequelize,
-    tableName: 'Pokemon',
-    schema: 'dbo',
+    tableName: 'pokemon',
     timestamps: false,
     indexes: [
       {
-        name: "PK__Pokemon__3214EC079EDE9E82",
+        name: "PRIMARY",
         unique: true,
+        using: "BTREE",
         fields: [
           { name: "Id" },
         ]
       },
     ]
   });
-};
-
-export default model
+  }
+}

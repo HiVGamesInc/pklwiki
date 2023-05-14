@@ -1,29 +1,22 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('move', {
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
+
+export default class move extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     Name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Move',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__Move__3214EC079EDFDB8B",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'move',
+    timestamps: false
   });
-};
+  }
+}

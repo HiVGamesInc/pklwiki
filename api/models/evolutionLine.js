@@ -1,41 +1,26 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('evolutionLine', {
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
+
+export default class evolutionline extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     PokemonId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Pokemon',
-        key: 'Id'
-      }
+      allowNull: true
     },
     EvolutionId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Pokemon',
-        key: 'Id'
-      }
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'EvolutionLine',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__Evolutio__3214EC07BD725FD8",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'evolutionline',
+    timestamps: false
   });
-};
+  }
+}

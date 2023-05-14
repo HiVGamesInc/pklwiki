@@ -1,7 +1,9 @@
-import { DataTypes } from 'sequelize';
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
 
- function model(sequelize) {
-  const a = sequelize.define('pokemonType', {
+export default class pokemontype extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -12,7 +14,7 @@ import { DataTypes } from 'sequelize';
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Pokemon',
+        model: 'pokemon',
         key: 'Id'
       }
     },
@@ -20,27 +22,38 @@ import { DataTypes } from 'sequelize';
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Type',
+        model: 'type',
         key: 'Id'
       }
     }
   }, {
     sequelize,
-    tableName: 'PokemonType',
-    schema: 'dbo',
+    tableName: 'pokemontype',
     timestamps: false,
     indexes: [
       {
-        name: "PK__PokemonT__3214EC074EB02B9E",
+        name: "PRIMARY",
         unique: true,
+        using: "BTREE",
         fields: [
           { name: "Id" },
         ]
       },
+      {
+        name: "fk_pokemonType_pokemonId_idx",
+        using: "BTREE",
+        fields: [
+          { name: "PokemonId" },
+        ]
+      },
+      {
+        name: "fk_pokemonType_typeId_idx",
+        using: "BTREE",
+        fields: [
+          { name: "TypeId" },
+        ]
+      },
     ]
   });
-  console.log(sequelize.models)
-  return a
-};
-
-export default model;
+  }
+}

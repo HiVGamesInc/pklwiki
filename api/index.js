@@ -1,47 +1,45 @@
 import express from 'express'
 import Sequelize from 'sequelize';
-import msnodesqlv8 from 'msnodesqlv8/lib/sequelize/index.js'
-import initModels from './models/init-models.js'
-import * as PokemonService from './services/pokemon.js'
+import dotenv from 'dotenv'
+import mysql from 'mysql2'
+
+import initModels from './models/init-models'
+import mainRouter from './routes'
+
+dotenv.config()
 
 const app = express()
 const port = 3001
 
-export const db = {}
+export let sequelizeDb = {}
 
 async function init() {
-  const sequelizeDb = new Sequelize('','','', {
-    host: '(localdb)\\MSSQLLocalDB',
-    dialect: 'mssql',
-    dialectModule: msnodesqlv8,
-    dialectOptions: {
-        options: {
-          connectionString: 'server=(localdb)\\MSSQLLocalDB;Database=PklWikiDB;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}',
-        },
-      },
-    port: '1433',
+  sequelizeDb = new Sequelize(process.env.MYSQL_DBNAME, process.env.MYSQL_DBUSER,process.env.MYSQL_DBPASSWORD, {
+    dialect: 'mysql',
+    dialectModule: mysql,
+    noAlias: true,
   });
+
   
-  initModels()
-  
-  // sync all models with database (careful, make changes in database)
-  // await sequelizeDb.sync({ alter: true });
+  try {
+    await sequelizeDb.authenticate();
+    console.log('Connection has been established successfully.');
+
+    initModels(sequelizeDb)
+    setupRoutes()
+
+    // sync all models with database (careful, make changes in database)
+    // await sequelizeDb.sync({ alter: true });
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 }
 
-app.get('/', (req, res) => {
-  res.send('Hello 321!')
-})
-
-app.get('/pokemon', async (req, res) => {
-  const pokemonRows = await PokemonService.getAll();
-  
-  const pokeArr = []
-  pokemonRows.forEach(({ dataValues: poke }) => {
-    pokeArr.push(poke)
+const setupRoutes = () => {
+  mainRouter.forEach(route => {
+    app.use(route.path, route.router)
   })
-
-  res.status(200).send(pokeArr)
-})
+}
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -1,41 +1,26 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('pokemonMove', {
+import _sequelize from 'sequelize';
+const { Model, Sequelize } = _sequelize;
+
+export default class pokemonmove extends Model {
+  static init(sequelize, DataTypes) {
+  return super.init({
     Id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     PokemonId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Pokemon',
-        key: 'Id'
-      }
+      allowNull: true
     },
     MoveId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Move',
-        key: 'Id'
-      }
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'PokemonMove',
-    schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__PokemonM__3214EC076412F8B8",
-        unique: true,
-        fields: [
-          { name: "Id" },
-        ]
-      },
-    ]
+    tableName: 'pokemonmove',
+    timestamps: false
   });
-};
+  }
+}

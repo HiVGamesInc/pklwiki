@@ -4,6 +4,7 @@ const mysql = require('mysql2')
 require('dotenv').config()
 
 const configObj = {
+    host: process.env.MYSQL_DBHOST,
     dialect: 'mysql',
     dialectModule: mysql,
     lang: 'esm',

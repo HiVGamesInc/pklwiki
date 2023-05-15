@@ -14,7 +14,8 @@ const port = 3001
 export let sequelizeDb = {}
 
 async function init() {
-  sequelizeDb = new Sequelize(process.env.MYSQL_DBNAME, process.env.MYSQL_DBUSER,process.env.MYSQL_DBPASSWORD, {
+  sequelizeDb = new Sequelize(process.env.MYSQL_DBNAME, process.env.MYSQL_DBUSER, process.env.MYSQL_DBPASSWORD, {
+    host: process.env.MYSQL_DBHOST,
     dialect: 'mysql',
     dialectModule: mysql,
     noAlias: true,

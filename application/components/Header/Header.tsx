@@ -1,16 +1,19 @@
-import Link from "next/link";
+// import Link from "next/link";
+import Image from "next/image";
 import {
-  MagnifyingGlassIcon,
-  MoonIcon,
-  SunIcon
+  MagnifyingGlassIcon
+  // MoonIcon,
+  // SunIcon,
 } from "@heroicons/react/24/solid";
+
 import Icon from "components/Icon/Icon";
 import Input from "components/Input/Input";
 import { useThemeContext } from "context/theme";
 
 export default function Header() {
-  const { darkMode, setDarkMode } = useThemeContext();
-  const DarkModeIcon = !darkMode ? MoonIcon : SunIcon;
+  const { darkMode } = useThemeContext();
+  // const { darkMode, setDarkMode } = useThemeContext();
+  // const DarkModeIcon = !darkMode ? MoonIcon : SunIcon;
 
   return (
     <header
@@ -19,7 +22,7 @@ export default function Header() {
       }`}
     >
       <span className="flex items-center justify-between w-full max-w-screen-xl mx-auto h-16 p-4">
-        <img
+        <Image
           src="https://placehold.co/200x50.png"
           alt="Logo"
           className="h-full"

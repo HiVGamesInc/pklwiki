@@ -11,7 +11,7 @@ export default function Header() {
     { img: "/icons/_Container.png", title: "Podéx", href: "/podex" },
     { img: "/icons/_windy.png", title: "Elementos", href: "/elements" },
     { img: "/icons/_Crown.png", title: "Skills", href: "/skills" },
-    { img: "/icons/_Direction.png", title: "Quests Test", href: "/quests" },
+    { img: "/icons/_Direction.png", title: "Quests Test 2", href: "/quests" },
     { img: "/icons/_Bag.png", title: "Tasks", href: "/tasks" },
     {
       img: "/icons/_Pokemon Trainer Boy.png",

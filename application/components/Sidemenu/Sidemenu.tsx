@@ -24,20 +24,18 @@ export default function Header() {
   return (
     <aside className="flex flex-col w-96 p-4 bg-bgPrimary rounded-xl shadow-md">
       {menuItems.map((item, i) => (
-        <>
-          <Link
-            key={i}
-            className="text-base px-4 py-4 text-dBlack relative"
-            href={item.href}
-          >
-            <span className="z-10 flex items-center relative">
-              <Icon size={1.5} img={item.img} /> {item.title}
-            </span>
-            {pathname.startsWith(item.href) && (
-              <div className="absolute bg-dBlack w-1 h-8 top-1/2 left-0 translate-y-[-50%]"></div>
-            )}
-          </Link>
-        </>
+        <Link
+          key={i}
+          className="text-base px-4 py-4 text-dBlack relative"
+          href={item.href}
+        >
+          <span className="z-10 flex items-center relative">
+            <Icon size={1.5} img={item.img} /> {item.title}
+          </span>
+          {pathname.startsWith(item.href) && (
+            <div className="absolute bg-dBlack w-1 h-8 top-1/2 left-0 translate-y-[-50%]"></div>
+          )}
+        </Link>
       ))}
     </aside>
   );

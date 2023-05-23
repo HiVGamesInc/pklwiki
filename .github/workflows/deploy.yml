@@ -1,0 +1,38 @@
+name: Prod Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy repository contents via scp
+        uses: appleboy/scp-action@master
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          source: "."
+          target: "/usr/documents/projects/pklwiki"
+
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          script: |
+            cd /usr/documents/projects/pklwiki
+            git pull origin master
+            git status
+            cd /usr/documents/projects/pklwiki/api
+            npm install --only=prod
+            npm run build
+            cd /usr/documents/projects/pklwiki/application
+            npm install --only=prod
+            npm run build
+            pm2 restart pkl-app

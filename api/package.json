@@ -16,17 +16,17 @@
   "dependencies": {
     "express": "^4.18.2",
     "mysql2": "^3.3.1",
-    "nodemon": "^2.0.22",
-    "sequelize": "^5.22.3",
-    "sequelize-auto": "^0.8.8"
+    "sequelize": "^5.22.3"
   },
   "devDependencies": {
+    "nodemon": "^2.0.22",
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.8",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
     "babel-plugin-add-import-extension": "^1.6.0",
     "dotenv": "^16.0.3",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "sequelize-auto": "^0.8.8"
   }
 }

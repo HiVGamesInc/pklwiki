@@ -30,10 +30,10 @@ jobs:
             git pull origin master
             git status
             cd /usr/documents/projects/pklwiki/api
-            npm install --only=prod
+            npm install
             npm run build
+            pm2 restart pkl-api
             cd /usr/documents/projects/pklwiki/application
-            npm install --only=prod
+            npm install
             npm run build
             pm2 restart pkl-app
-            pm2 restart pkl-api

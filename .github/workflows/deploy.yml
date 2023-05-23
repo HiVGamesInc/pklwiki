@@ -27,6 +27,7 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
           script: |
             cd /usr/documents/projects/pklwiki
+            git reset --hard
             git pull origin master
             git status
             cd /usr/documents/projects/pklwiki/api

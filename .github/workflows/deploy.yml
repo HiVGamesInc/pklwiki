@@ -36,3 +36,4 @@ jobs:
             npm install --only=prod
             npm run build
             pm2 restart pkl-app
+            pm2 restart pkl-api

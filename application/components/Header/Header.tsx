@@ -24,6 +24,8 @@ export default function Header() {
         <Image
           src="https://placehold.co/200x50.png"
           alt="Logo"
+          width={200}
+          height={50}
           className="h-full"
         />
         <div className="flex items-center relative">
